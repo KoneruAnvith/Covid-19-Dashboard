@@ -6,6 +6,7 @@ import DistrictItem from '../DistrictItem'
 import TimeLineData from '../TimeLineData'
 import Footer from '../Footer'
 import './index.css'
+import Header from '../Header'
 
 const statesList = [
   {
@@ -198,9 +199,7 @@ class StateSpecificDetails extends Component {
   }
 
   convertObjectsDataIntoListItemsUsingForInMethod = () => {
-    const {location} = this.props
-    const {state} = location
-    console.log(`state`, state)
+    // console.log(`state`, state)
     const {stateWiseData} = this.state
     const resultList = []
 
@@ -317,7 +316,7 @@ class StateSpecificDetails extends Component {
       })
 
     const sortedArray = sortByCaseKey(districtDataList, activeCaseClass)
-    // console.log(`sorted_case_array`, sortedArray)
+    console.log(`sorted_case_array`, sortedArray)
 
     const showConfirmed = () => {
       this.setState({
@@ -411,7 +410,7 @@ class StateSpecificDetails extends Component {
         </h1>
 
         <ul className="districts-data-list" testid="topDistrictsUnorderedList">
-          {districtDataList.map(eachState => (
+          {sortedArray.map(eachState => (
             <DistrictItem
               key={eachState.districtName}
               districtDetails={eachState}
@@ -431,24 +430,31 @@ class StateSpecificDetails extends Component {
 
   renderLoadingView = () => (
     <div className="covid-loader-container" testid="stateDetailsLoader">
-      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+      <Loader type="Oval" color="#0b69ff" height="50" width="50" />
     </div>
   )
 
-  render() {
-    const renderStateSpecificRoute = () => {
-      const {apiStatus} = this.state
+  renderStateSpecificRoute = () => {
+    const {apiStatus} = this.state
 
-      switch (apiStatus) {
-        case apiStatusConstants.success:
-          return this.renderStateSpecificData()
-        case apiStatusConstants.inProgress:
-          return this.renderLoadingView()
-        default:
-          return null
-      }
+    switch (apiStatus) {
+      case apiStatusConstants.success:
+        return this.renderStateSpecificData()
+      case apiStatusConstants.inProgress:
+        return this.renderLoadingView()
+      default:
+        return null
     }
-    return <div>{renderStateSpecificRoute()}</div>
+  }
+
+  render() {
+    // console.log('Hello')
+    return (
+      <div>
+        <Header />
+        {this.renderStateSpecificRoute()}
+      </div>
+    )
   }
 }
 

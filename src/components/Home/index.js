@@ -3,7 +3,8 @@ import {Component} from 'react'
 import {BsSearch} from 'react-icons/bs'
 import {FcGenericSortingAsc, FcGenericSortingDesc} from 'react-icons/fc'
 import Loader from 'react-loader-spinner'
-import StateWiseTotalRecord from '../StateWiseTotalRecord'
+import Header from '../Header'
+import StateWiseTotalRecord from '../StateWiseRecord'
 import HomeCaseCardItem from '../HomeCaseCardItem'
 import SearchRecommendation from '../SearchRecommendation'
 import Footer from '../Footer'
@@ -200,11 +201,19 @@ class Home extends Component {
   }
 
   onchangeSearchInput = event => {
-    this.setState({
-      showSearchSuggestions: true,
-      searchInput: event.target.value,
-      showStateStats: false,
-    })
+    if (event.target.value === '') {
+      this.setState({
+        showSearchSuggestions: false,
+        searchInput: event.target.value,
+        showStateStats: true,
+      })
+    } else {
+      this.setState({
+        showSearchSuggestions: true,
+        searchInput: event.target.value,
+        showStateStats: false,
+      })
+    }
   }
 
   convertObjectsDataIntoListItemsUsingForInMethod = () => {
@@ -305,7 +314,7 @@ class Home extends Component {
     } = this.state
 
     TabelData = this.convertObjectsDataIntoListItemsUsingForInMethod()
-    console.log(`tableData`, TabelData)
+    // console.log(`tableData`, TabelData)
     // console.log(`tableStateDataList`, tableStateDataList)
     // TabelData.map(eachState => {
     //     totalConfirmed : eachState.confirmed
@@ -334,6 +343,7 @@ class Home extends Component {
     })
 
     const sum = TabelData.reduce(getUpdated)
+    // console.log(sum)
 
     return (
       <div className="home-route-container">
@@ -344,6 +354,8 @@ class Home extends Component {
             className="search-input"
             placeholder="Enter the State"
             onChange={this.onchangeSearchInput}
+            onBlur={this.onChangeFocus}
+            value={searchInput}
           />
         </div>
         {showSearchSuggestions && (
@@ -463,7 +475,7 @@ class Home extends Component {
 
   renderLoadingView = () => (
     <div testid="homeRouteLoader" className="covid-loader-container">
-      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+      <Loader type="Oval" color="#0b69ff" height="50" width="50" />
     </div>
   )
 
@@ -482,9 +494,12 @@ class Home extends Component {
   }
 
   render() {
-    const {stateWiseData} = this.state
-    console.log('stateWiseData', stateWiseData)
-    return <div>{this.renderCovidData()}</div>
+    return (
+      <div>
+        <Header />
+        {this.renderCovidData()}
+      </div>
+    )
   }
 }
 

@@ -4,7 +4,7 @@ const StateWiseRecord = props => {
   const {stateTotal} = props
   const {confirmed, deceased, name, population, recovered, active} = stateTotal
 
-  // console.log(name)
+  // console.log(confirmed)
   return (
     <li className="state-total-record-card">
       <p className="case-item state-name">{name}</p>

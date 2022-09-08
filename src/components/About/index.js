@@ -1,6 +1,7 @@
 import {Component} from 'react'
 import Loader from 'react-loader-spinner'
-import FaqItem from '../FaqItem'
+import Header from '../Header'
+import FaqItem from '../FaqsList'
 import Footer from '../Footer'
 import './index.css'
 
@@ -12,7 +13,6 @@ const apiStatusConstants = {
 
 class About extends Component {
   state = {
-    faqsData: [],
     faqsList: [],
     apiStatus: apiStatusConstants.initial,
   }
@@ -34,7 +34,6 @@ class About extends Component {
     if (response.ok) {
       const fetchedData = await response.json()
       this.setState({
-        faqsData: fetchedData,
         faqsList: fetchedData.faq,
         apiStatus: apiStatusConstants.success,
       })
@@ -42,7 +41,7 @@ class About extends Component {
   }
 
   renderCovidAbout = () => {
-    const {faqsData, faqsList} = this.state
+    const {faqsList} = this.state
     return (
       <div className="about-route-container">
         <h1 className="about-heading">About</h1>
@@ -62,7 +61,7 @@ class About extends Component {
 
   renderLoadingView = () => (
     <div className="covid-loader-container" testid="aboutRouteLoader">
-      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+      <Loader type="Oval" color="#0b69ff" height="50" width="50" />
     </div>
   )
 
@@ -79,7 +78,12 @@ class About extends Component {
   }
 
   render() {
-    return <>{this.renderCovidAboutData()}</>
+    return (
+      <>
+        <Header />
+        {this.renderCovidAboutData()}
+      </>
+    )
   }
 }
 

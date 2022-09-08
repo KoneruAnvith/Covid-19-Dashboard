@@ -8,6 +8,9 @@ const HomeCaseCardItem = props => {
     showRecoveredCases,
     showConfirmedCases,
   } = props
+
+  // console.log(stateTotal)
+
   const {confirmed, deceased, recovered, active} = stateTotal
 
   const activeConfirmedClass = showConfirmedCases

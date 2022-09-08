@@ -80,7 +80,7 @@ class TimeLineData extends Component {
     const lastTenDates = []
     const keyNames = Object.keys(allDates)
     const reversedKeyNames = keyNames.reverse()
-    console.log(`reversedKeyNames`, reversedKeyNames)
+    // console.log(`reversedKeyNames`, reversedKeyNames)
     reversedKeyNames.forEach(eachKey => {
       if (eachKey !== undefined) {
         const {delta} = allDates[eachKey]
@@ -131,7 +131,7 @@ class TimeLineData extends Component {
   renderBarChart = lastTenDaysCases => {
     const {activeCaseClass} = this.props
 
-    console.log(activeCaseClass)
+    // console.log(activeCaseClass)
     return (
       <div className="graph-container">
         {activeCaseClass === 'confirmed' && (
@@ -387,7 +387,7 @@ class TimeLineData extends Component {
   getLastDateOfMonth = allDates => {
     const lastDates = []
     const keyNames = Object.keys(allDates)
-    console.log(keyNames)
+    // console.log(keyNames)
     keyNames.forEach(eachKey => {
       const dateString = eachKey
       const date = Date.parse(dateString)
@@ -398,7 +398,7 @@ class TimeLineData extends Component {
         0,
       )
 
-      console.log(lastDateOfMonth)
+      // console.log(lastDateOfMonth)
 
       if (!lastDates.includes(`${lastDateOfMonth}`)) {
         lastDates.push(lastDateOfMonth)
@@ -412,18 +412,18 @@ class TimeLineData extends Component {
     // const activeTrend = activeOption ? 'active-class' : ''
 
     const singleTimeLineDataList = this.convertObjectsDataIntoListItemsUsingForInMethod()
-    console.log('singleTimeLineDataList', singleTimeLineDataList)
+    // console.log('singleTimeLineDataList', singleTimeLineDataList)
 
     const [dates] = singleTimeLineDataList
 
     const allDates = this.getAllDates(dates)
-    console.log(`allDates`, allDates)
+    // console.log(`allDates`, allDates)
 
     const lastTenDaysCases = this.convertLastAllDatesObjectIntoAList(allDates)
-    console.log(lastTenDaysCases)
+    // console.log(lastTenDaysCases)
 
-    const lastDateOfMonths = this.getLastDateOfMonth(allDates)
-    console.log(lastDateOfMonths)
+    // const lastDateOfMonths = this.getLastDateOfMonth(allDates)
+    // console.log(lastDateOfMonths)
     return (
       <div>
         {this.renderBarChart(lastTenDaysCases)}
@@ -435,7 +435,7 @@ class TimeLineData extends Component {
 
   renderLoadingView = () => (
     <div className="covid-loader-container" testid="timelinesDataLoader">
-      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+      <Loader type="Oval" color="#0b69ff" height="50" width="50" />
     </div>
   )
 

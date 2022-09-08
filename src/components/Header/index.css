@@ -2,6 +2,9 @@
   height: 60px;
   background-color: #1e1e30;
   width: 100%;
+  position: fixed;
+  padding-left: 60px;
+  padding-right: 60px;
 }
 
 .nav-bar-sm-container {

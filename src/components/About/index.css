@@ -4,7 +4,7 @@
   min-height: 100vh;
   background-color: #161625;
   padding-left: 60px;
-  padding-top: 40px;
+  padding-top: 90px;
   padding-right: 20px;
   padding-bottom: 20px;
 }
@@ -12,6 +12,7 @@
 @media screen and (max-width: 768px) {
   .about-route-container {
     padding: 20px;
+    padding-top: 60px;
   }
 }
 .about-description {

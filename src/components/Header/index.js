@@ -7,6 +7,7 @@ class Header extends Component {
     displaySmNavItems: false,
     activeHomeNav: true,
     activeAboutNav: false,
+    activeVaccinationNav: false,
   }
 
   onClickNavBarIcon = () => {
@@ -22,17 +23,40 @@ class Header extends Component {
   }
 
   activeHomeNav = () => {
-    this.setState({activeHomeNav: true, activeAboutNav: false})
+    this.setState({
+      activeHomeNav: true,
+      activeAboutNav: false,
+      activeVaccinationNav: false,
+    })
   }
 
   activeAboutNav = () => {
-    this.setState({activeHomeNav: false, activeAboutNav: true})
+    this.setState({
+      activeHomeNav: false,
+      activeAboutNav: true,
+      activeVaccinationNav: false,
+    })
+  }
+
+  activeVaccinationNav = () => {
+    this.setState({
+      activeHomeNav: false,
+      activeAboutNav: false,
+      activeVaccinationNav: true,
+    })
   }
 
   render() {
-    const {displaySmNavItems, activeHomeNav, activeAboutNav} = this.state
+    const {
+      displaySmNavItems,
+      activeHomeNav,
+      activeAboutNav,
+      activeVaccinationNav,
+    } = this.state
     const activeHomeClass = activeHomeNav === true ? 'active-tab-class' : ''
     const activeAboutClass = activeAboutNav === true ? 'active-tab-class' : ''
+    const activeVaccinationClass =
+      activeVaccinationNav === true ? 'active-tab-class' : ''
 
     return (
       <div className="header-container">
@@ -73,6 +97,14 @@ class Header extends Component {
                   About
                 </li>
               </Link>
+              <Link to="/vaccination" className="nav-item-link">
+                <li
+                  onClick={this.activeVaccinationNav}
+                  className={`nav-item ${activeVaccinationClass}`}
+                >
+                  Vaccination
+                </li>
+              </Link>
             </ul>
             <button
               testid="close-nav-btn"
@@ -110,6 +142,15 @@ class Header extends Component {
                 onClick={this.activeAboutNav}
               >
                 About
+              </li>
+            </Link>
+
+            <Link to="/vaccination" className="nav-item-link">
+              <li
+                className={`nav-item ${activeVaccinationClass}`}
+                onClick={this.activeVaccinationNav}
+              >
+                Vaccination
               </li>
             </Link>
           </ul>

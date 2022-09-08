@@ -20,8 +20,3 @@ const SearchRecommendation = props => {
   )
 }
 export default SearchRecommendation
-
-//   to={{
-//     pathname: `/state/${stateCode}`,
-//     state: {stateWiseData: allStates, timeLineData},
-//   }}
